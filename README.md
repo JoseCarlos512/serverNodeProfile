@@ -55,10 +55,20 @@ added 3 packages, and audited 165 packages in 4s
 
 found 0 vulnerabilities
 
-### 
+### JsonWebToken
 $ npm i jsonwebtoken
 
 added 10 packages, and audited 175 packages in 7s
+
+12 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+### Bcrypt (encriptar los password)
+$ npm i bcryptjs --save
+
+up to date, audited 184 packages in 1s
 
 12 packages are looking for funding
   run `npm fund` for details
