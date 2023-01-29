@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const usuario_1 = require("../modelos/usuario");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
+const token_1 = __importDefault(require("../clases/token"));
 const usuarioRutas = (0, express_1.Router)();
 // Crear Usuario
 usuarioRutas.post('/crear', (req, resp) => {
@@ -39,10 +40,14 @@ usuarioRutas.post('/login', (req, resp) => {
             });
         }
         if (usuarioDB.compararContrasena(body.password)) {
+            const token = token_1.default.getToken({
+                _id: usuarioDB._id,
+                nombre: usuarioDB.nombre,
+                password: usuarioDB.password
+            });
             resp.json({
                 ok: true,
-                usuario: usuarioDB,
-                token: '123'
+                token: token
             });
         }
         else {

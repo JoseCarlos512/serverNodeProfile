@@ -2,6 +2,7 @@ import { Router, Request, Response } from "express";
 import { Usuario } from "../modelos/usuario";
 
 import bcrypt from "bcryptjs";
+import Token from "../clases/token";
 
 const usuarioRutas = Router();
 
@@ -43,11 +44,18 @@ usuarioRutas.post('/login', (req: Request, resp: Response) => {
         }
 
         if (usuarioDB.compararContrasena(body.password)) {
+
+            const token = Token.getToken({
+                _id: usuarioDB._id,
+                nombre: usuarioDB.nombre,
+                password: usuarioDB.password
+            });
+
             resp.json({
                 ok: true,
-                usuario:usuarioDB,
-                token: '123'
+                token: token
             })
+
         } else {
             return resp.json({
                 ok: false,
