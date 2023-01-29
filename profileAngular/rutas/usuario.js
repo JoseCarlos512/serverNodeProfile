@@ -26,4 +26,31 @@ usuarioRutas.post('/crear', (req, resp) => {
         });
     });
 });
+// Login Usuario
+usuarioRutas.post('/login', (req, resp) => {
+    const body = req.body;
+    usuario_1.Usuario.findOne({ nombre: body.nombre }, (err, usuarioDB) => {
+        if (err)
+            throw err;
+        if (!usuarioDB) {
+            return resp.json({
+                ok: false,
+                mensaje: 'Invalid data'
+            });
+        }
+        if (usuarioDB.compararContrasena(body.password)) {
+            resp.json({
+                ok: true,
+                usuario: usuarioDB,
+                token: '123'
+            });
+        }
+        else {
+            return resp.json({
+                ok: false,
+                mensaje: 'Invalid Data'
+            });
+        }
+    });
+});
 exports.default = usuarioRutas;
