@@ -2,6 +2,7 @@ import Server from "./clases/server";
 import mongoose from "mongoose";
 
 import usuarioRutas from "./rutas/usuario";
+import contactoRutas from "./rutas/contacto";
 import bodyParser from "body-parser";
 
 const server = new Server();
@@ -14,6 +15,7 @@ server.app.use(bodyParser.json()); // le dice al sistema que desea que se use js
 
 // Rutas - Principal
 server.app.use('/usuario', usuarioRutas);
+server.app.use('/contacto', contactoRutas);
 
 // Conectar con Base de Datos
 mongoose
@@ -24,8 +26,6 @@ mongoose
         console.log("Base de Datos Online")
     }
 );
-    
-
 
 // Levantar Servidor
 server.start(()=> {

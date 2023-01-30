@@ -18,6 +18,10 @@ const usuarioSchema = new mongoose_1.Schema({
         required: [true, "El contraseña el obligatoria"]
     }
 });
+/**
+ *  Se esta insertando un metodo al esquema usuarios
+ *  usando mongoose
+ */
 usuarioSchema.method('compararContrasena', function (password = '') {
     if (bcryptjs_1.default.compareSync(password, this.password)) {
         return true;
