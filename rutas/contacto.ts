@@ -6,7 +6,7 @@ import { verificarToken } from "../middelwares/autenticacion";
 
 const contactoRutas = Router();
 
-// Crear Contacto
+// Crear Contacto (API)
 contactoRutas.post('/crear', (req: Request, resp: Response) => {
 
     const contacto = {
@@ -14,7 +14,7 @@ contactoRutas.post('/crear', (req: Request, resp: Response) => {
         mensaje: req.body.mensaje,
     }
 
-    // Almacenar informacion
+    // Almacenar informacion (ACCION DB)
     Contacto.create(contacto).then(contactoDB => {
         resp.json({
             ok: true,
@@ -25,6 +25,21 @@ contactoRutas.post('/crear', (req: Request, resp: Response) => {
         resp.json({
             ok: false,
             err
+        })
+    })
+})
+
+// Delete contacto
+contactoRutas.delete("/delete/:id", (req:any, resp: Response) => {
+    const id = req.params.id;
+
+    Contacto.findOneAndRemove(id, (err:any, contactoBorrar:any) => {
+
+        if (err) throw err;
+        resp.json({
+            ok: true,
+            mensaje: "Comentario eliminado",
+            body: contactoBorrar
         })
     })
 })

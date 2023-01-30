@@ -78,3 +78,7 @@ found 0 vulnerabilities
 ### Dudas de uso de body parser
 ¿Qué hace `app.use ( bodyParser.json ( ) )`?
 https://stackoverflow.com/questions/39870867/what-does-app-usebodyparser-json-do
+
+
+### Para poder subir imagenes, se agrega dependencia file-upload
+express-fileupload
