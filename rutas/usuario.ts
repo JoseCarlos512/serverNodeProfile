@@ -3,6 +3,7 @@ import { Usuario } from "../modelos/usuario";
 
 import bcrypt from "bcryptjs";
 import Token from "../clases/token";
+import { verificarToken } from "../middelwares/autenticacion";
 
 const usuarioRutas = Router();
 
@@ -39,7 +40,7 @@ usuarioRutas.post('/login', (req: Request, resp: Response) => {
         if (!usuarioDB) {
             return resp.json({
                 ok: false,
-                mensaje: 'Invalid data'
+                mensaje: 'Tu Usuario no fue encontrado en la BD'
             })
         }
 
@@ -59,10 +60,56 @@ usuarioRutas.post('/login', (req: Request, resp: Response) => {
         } else {
             return resp.json({
                 ok: false,
-                mensaje: 'Invalid Data'
+                mensaje: 'Tu constraseña fue mal escrita'
             })
         }
     })
 })
+
+// Actualizar Usuario
+usuarioRutas.post('/update', verificarToken, (req:any, resp:Response) => {
+    
+    const usuario = {
+        nombre: req.body.nombre || req.usuario.nombre,
+        password: req.body.password || req.usuario.password
+    }
+
+    // Encryptar password
+    usuario.password = bcrypt.hashSync(usuario.password,10)
+
+    Usuario.findByIdAndUpdate(req.usuario._id, usuario, {new:true}, (err, userDB) => {
+        
+        if (err) throw err
+        if (!userDB) {
+            resp.json({
+                ok: false,
+                mensaje: 'Informacion invalida'
+            })
+        }
+
+        const miToken = Token.getToken({
+            _id: userDB?._id,
+            nombre: userDB?.nombre,
+            password: userDB?.password
+        })
+
+        resp.json({
+            ok: true,
+            token: miToken
+        })
+    })
+})
+
+usuarioRutas.get('/',async (req:any, resp:Response) => {
+    
+    const user = await Usuario.find().exec();
+    //const user = await Usuario.find().limit(2).exec();
+
+    resp.json({
+        ok: true,
+        users: user
+    })
+})
+
 
 export default usuarioRutas;

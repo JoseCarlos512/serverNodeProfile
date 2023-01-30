@@ -9,10 +9,10 @@ const usuario_1 = __importDefault(require("./rutas/usuario"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const server = new server_1.default();
 const URI = 'mongodb://127.0.0.1:27017/profileAngularBD';
-// Body Parser
-server.app.use(body_parser_1.default.urlencoded({ extended: true }));
-server.app.use(body_parser_1.default.json());
-// Rutas
+// Body Parser 
+server.app.use(body_parser_1.default.urlencoded({ extended: true })); // le dice al sistema si desea utilizar un algoritmo simple o complejo
+server.app.use(body_parser_1.default.json()); // le dice al sistema que desea que se use json.
+// Rutas - Principal
 server.app.use('/usuario', usuario_1.default);
 // Conectar con Base de Datos
 mongoose_1.default

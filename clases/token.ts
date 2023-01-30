@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 
 export default class Token {
     private static semilla:string = "semilla-seed,privacidadYPropia-ProfileAngular"
-    private static caducidad: string = "1800" // Media Hora
+    private static caducidad: string = "1h" // Media Hora
     // 1h = 1 hora; 1d = 1 dia
 
     constructor() {

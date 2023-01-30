@@ -28,4 +28,4 @@ class Token {
 }
 exports.default = Token;
 Token.semilla = "semilla-seed,privacidadYPropia-ProfileAngular";
-Token.caducidad = "1800"; // Media Hora
+Token.caducidad = "1h"; // Media Hora

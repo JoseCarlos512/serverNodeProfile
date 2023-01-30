@@ -74,3 +74,7 @@ up to date, audited 184 packages in 1s
   run `npm fund` for details
 
 found 0 vulnerabilities
+
+### Dudas de uso de body parser
+¿Qué hace `app.use ( bodyParser.json ( ) )`?
+https://stackoverflow.com/questions/39870867/what-does-app-usebodyparser-json-do
