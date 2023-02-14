@@ -11,6 +11,7 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const imagen_1 = __importDefault(require("./rutas/imagen"));
 const express_fileupload_1 = __importDefault(require("express-fileupload"));
 const sobreMi_1 = __importDefault(require("./rutas/sobreMi"));
+const tecnologia_1 = __importDefault(require("./rutas/tecnologia"));
 const server = new server_1.default();
 const URI = 'mongodb://127.0.0.1:27017/profileAngularBD';
 // Body Parser 
@@ -23,6 +24,7 @@ server.app.use('/usuario', usuario_1.default);
 server.app.use('/contacto', contacto_1.default);
 server.app.use('/imagen', imagen_1.default);
 server.app.use('/sobremi', sobreMi_1.default);
+server.app.use('/tecnologia', tecnologia_1.default);
 // Conectar con Base de Datos
 mongoose_1.default
     .set('strictQuery', false)
