@@ -32,4 +32,14 @@ imagenRuta.get('/:img', (req, resp) => {
     const pathImagen = fileSystem.getImgUrl(img);
     resp.sendFile(pathImagen + "");
 });
+// Actualizar imagen
+// Recibir el identificador para actualizar correctamente
+imagenRuta.post('/update', autenticacion_1.verificarToken, (req, resp) => {
+    const file = req.files.img;
+    fileSystem.guardarImagen(file, req.usuario.nombre);
+    resp.json({
+        ok: true,
+        mensaje: 'Imagen actualizada'
+    });
+});
 exports.default = imagenRuta;
