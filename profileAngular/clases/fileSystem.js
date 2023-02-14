@@ -33,5 +33,9 @@ class FileSystem {
         }
         return mStrPath;
     }
+    getImgUrl(img) {
+        const pathImagen = path_1.default.resolve(__dirname, '../uploads', 'carlos@untels.pe', img);
+        return pathImagen;
+    }
 }
 exports.default = FileSystem;

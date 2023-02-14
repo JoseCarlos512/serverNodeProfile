@@ -20,11 +20,20 @@ imagenRuta.post('/', verificarToken, (req: any, resp: Response) => {
             imgDB
         })
 
+        console.log("nombre: ")
         fileSystem.guardarImagen(file, req.usuario.nombre);
     }).catch((err)=> {
         resp.json(err)
     })
     
 })
+
+
+// Mostrar imagen por URL
+imagenRuta.get('/:img', (req:any, resp:Response) => {
+    const img = req.params.img;
+    const pathImagen = fileSystem.getImgUrl(img);
+    resp.sendFile(pathImagen+"");
+});
 
 export default imagenRuta;

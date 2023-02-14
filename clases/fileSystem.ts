@@ -39,4 +39,9 @@ export default class FileSystem {
 
         return mStrPath;
     }
+
+    public getImgUrl(img: string) {
+        const pathImagen = path.resolve(__dirname, '../uploads', 'carlos@untels.pe',img)
+        return pathImagen;
+    }
 }
