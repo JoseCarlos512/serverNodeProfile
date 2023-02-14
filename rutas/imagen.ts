@@ -2,6 +2,8 @@ import { Router, Request, Response } from "express";
 import { Imagen } from "../modelos/imagen";
 import { verificarToken } from "../middelwares/autenticacion";
 import FileSystem from "../clases/fileSystem";
+import fs from "fs";
+import path from "path";
 
 const imagenRuta = Router();
 const fileSystem = new FileSystem();
@@ -47,5 +49,23 @@ imagenRuta.post('/update', verificarToken, (req:any, resp:Response) => {
         mensaje: 'Imagen actualizada'
     });
 });
+
+imagenRuta.delete('/delete/:id/:name', verificarToken, (req: any, resp:Response) => {
+    
+    const id = req.params.id;
+    const name = req.params.name;
+    
+    Imagen.findByIdAndRemove(id, (err:any, imgBorrar:any) => {
+        if (err) throw err;
+
+        resp.json({
+            ok: true,
+            mensaje: 'Imagen eliminada',
+            imgBorrar
+        })
+
+        fs.unlinkSync(path.resolve(__dirname, '../uploads', 'carlos@untels.pe', name))
+    });
+})
 
 export default imagenRuta;

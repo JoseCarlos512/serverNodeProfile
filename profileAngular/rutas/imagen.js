@@ -7,6 +7,8 @@ const express_1 = require("express");
 const imagen_1 = require("../modelos/imagen");
 const autenticacion_1 = require("../middelwares/autenticacion");
 const fileSystem_1 = __importDefault(require("../clases/fileSystem"));
+const fs_1 = __importDefault(require("fs"));
+const path_1 = __importDefault(require("path"));
 const imagenRuta = (0, express_1.Router)();
 const fileSystem = new fileSystem_1.default();
 // Subir imagen
@@ -40,6 +42,20 @@ imagenRuta.post('/update', autenticacion_1.verificarToken, (req, resp) => {
     resp.json({
         ok: true,
         mensaje: 'Imagen actualizada'
+    });
+});
+imagenRuta.delete('/delete/:id/:name', autenticacion_1.verificarToken, (req, resp) => {
+    const id = req.params.id;
+    const name = req.params.name;
+    imagen_1.Imagen.findByIdAndRemove(id, (err, imgBorrar) => {
+        if (err)
+            throw err;
+        resp.json({
+            ok: true,
+            mensaje: 'Imagen eliminada',
+            imgBorrar
+        });
+        fs_1.default.unlinkSync(path_1.default.resolve(__dirname, '../uploads', 'carlos@untels.pe', name));
     });
 });
 exports.default = imagenRuta;
