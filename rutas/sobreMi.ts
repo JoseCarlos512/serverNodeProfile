@@ -32,7 +32,7 @@ sobreMiRuta.post('/update/:id', verificarToken, (req: any, resp: Response) => {
     };
 
     console.log(sobreMi);
-    
+
     SobreMi.findByIdAndUpdate(id, sobreMi, {new:true}, (err, sobreMiDB) => {
         
         if (err) throw err;
@@ -50,5 +50,21 @@ sobreMiRuta.post('/update/:id', verificarToken, (req: any, resp: Response) => {
     })
     
 })
+
+
+// Obtener informacion sobre mi
+sobreMiRuta.get('/', async (req: any, resp: Response) => {
+    
+    const sobreMi = await SobreMi.find()
+        .sort({_id:-1})
+        .exec();
+    
+    resp.json({
+        ok: true,
+        sobreMi
+    })
+    
+})
+
 
 export default sobreMiRuta;
