@@ -82,3 +82,10 @@ https://stackoverflow.com/questions/39870867/what-does-app-usebodyparser-json-do
 
 ### Para poder subir imagenes, se agrega dependencia file-upload
 express-fileupload
+
+
+## Levantar el servidor
+### Terminal 1
+tsc -w
+### Terminal 2
+nodemon profileAngular
