@@ -7,6 +7,7 @@ import imagenRuta from "./rutas/imagen";
 import fileupload from "express-fileupload";
 import sobreMiRuta from "./rutas/sobreMi";
 import tecnologiaRuta from "./rutas/tecnologia";
+import noticiaRuta from "./rutas/noticia";
 
 
 
@@ -27,6 +28,7 @@ server.app.use('/contacto', contactoRutas);
 server.app.use('/imagen', imagenRuta);
 server.app.use('/sobremi', sobreMiRuta);
 server.app.use('/tecnologia', tecnologiaRuta);
+server.app.use('/noticia', noticiaRuta);
 
 // Conectar con Base de Datos
 mongoose
