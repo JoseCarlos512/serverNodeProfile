@@ -84,6 +84,10 @@ https://stackoverflow.com/questions/39870867/what-does-app-usebodyparser-json-do
 express-fileupload
 
 
+### Instalar cors (Dependencia para configurar)
+  "cors": "^2.8.5",
+
+
 ## Levantar el servidor
 ### Terminal 1
 tsc -w

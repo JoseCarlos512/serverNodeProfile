@@ -22,7 +22,6 @@ imagenRuta.post('/', verificarToken, (req: any, resp: Response) => {
             imgDB
         })
 
-        console.log("nombre: ")
         fileSystem.guardarImagen(file, req.usuario.nombre);
     }).catch((err)=> {
         resp.json(err)

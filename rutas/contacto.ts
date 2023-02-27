@@ -44,4 +44,18 @@ contactoRutas.delete("/delete/:id", (req:any, resp: Response) => {
     })
 })
 
+// Obtener mensajes
+contactoRutas.get('/',async (req:any, resp: Response) => {
+    
+    const mensajes = await Contacto.find()
+        .sort({_id: -1})
+        .limit(50)
+        .exec();
+
+    resp.json({
+        ok: true,
+        mensajes
+    })
+})
+
 export default contactoRutas;

@@ -22,7 +22,6 @@ imagenRuta.post('/', autenticacion_1.verificarToken, (req, resp) => {
             ok: true,
             imgDB
         });
-        console.log("nombre: ");
         fileSystem.guardarImagen(file, req.usuario.nombre);
     }).catch((err) => {
         resp.json(err);
