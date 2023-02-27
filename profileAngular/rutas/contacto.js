@@ -35,7 +35,7 @@ contactoRutas.post('/crear', (req, resp) => {
 // Delete contacto
 contactoRutas.delete("/delete/:id", (req, resp) => {
     const id = req.params.id;
-    contacto_1.Contacto.findOneAndRemove(id, (err, contactoBorrar) => {
+    contacto_1.Contacto.findByIdAndRemove(id, (err, contactoBorrar) => {
         if (err)
             throw err;
         resp.json({
